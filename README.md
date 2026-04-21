@@ -1,20 +1,13 @@
 # Edify — RAG-Powered Academic Assistant
 
-A fourth-year CSE project demonstrating Retrieval-Augmented Generation (RAG) for academic study.
+A Third-year CSE Mini-Project demonstrating Retrieval-Augmented Generation (RAG) for academic study.
 
 ## Features
-
-| Feature | Description |
-|---|---|
-| **PDF Upload** | Upload lecture notes / textbook chapters as PDF |
-| **URL Ingestion** | Add any web page (Wikipedia, docs, articles) as a knowledge source |
-| **Multi-source** | Mix PDFs and URLs in a single session |
-| **RAG Chatbot** | Ask questions — answers grounded strictly in your content, with **source citations** |
-| **Question Generator** | MCQs, Short Answer, Long Answer — Easy / Medium / Hard — download as `.txt` |
-| **Summary Generator** | Short, Detailed, or Bullet-Point Notes — download as `.txt` |
-| **Key Topics Extractor** | Auto-detect the 6 main topics in a document |
-| **Persistent Indexes** | FAISS indexes saved per document — reload instantly |
-| **Dashboard** | Live metrics: docs, chunks, questions generated, chat turns |
+- RAG Chatbot with source citations
+- Question Generator (MCQ / Short / Long Answer)
+- Summary Generator (Short / Detailed / Bullet-Point Notes)
+- Multi-user login with SQLite
+- PDF upload + Web URL ingestion
 
 ## Architecture
 
@@ -45,7 +38,7 @@ FAISS Vector Store  (persisted to disk per document)
 Prompt Construction  (context + query)
        │
        ▼
-Gemini 2.0 Flash  (Google GenAI API)
+Gemini 3 Flash  (Google GenAI API)
        │
        ▼
 Response + Source Metadata → Streamlit UI
@@ -87,3 +80,6 @@ edify/
 - **Score-filtered retrieval**: only chunks with cosine distance < 1.5 are used, reducing hallucination
 - **Source metadata** propagated through the pipeline to show the user which chunk each answer came from
 - **Multi-source merging**: `add_texts()` on an existing FAISS store allows combining PDFs and URLs without rebuilding
+
+## Tech Stack
+Python · Streamlit · LangChain · FAISS · HuggingFace · Gemini 3 Flash · SQLite
