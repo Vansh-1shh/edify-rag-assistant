@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Project-specific (sensitive / generated files)
+edify_users.db
+faiss_indexes/
+temp_upload.pdf
+.env
+
+# API keys
+*.env
+secrets.py
+
+# IDE
+.vscode/
+.idea/
+*.DS_Store
