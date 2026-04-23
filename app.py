@@ -582,7 +582,7 @@ if st.session_state.vector_store is None:
     mode_txt = "dark" if st.session_state.dark_mode else "light"
     st.markdown(
         '<div style="text-align:center;padding:70px 20px;">'
-        '<div style="font-size:3rem;margin-bottom:16px;">📚</div>'
+        '<div style="font-size:3rem;margin-bottom:16px;"></div>'
         '<div style="font-family:\'DM Serif Display\',serif;font-size:1.6rem;'
         'color:var(--text);margin-bottom:10px;">No document loaded</div>'
         '<div style="color:var(--muted);font-size:.9rem;max-width:420px;margin:auto;">'
