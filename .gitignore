@@ -7,6 +7,7 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+.venv/
 
 # Project-specific (sensitive / generated files)
 edify_users.db

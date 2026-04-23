@@ -7,13 +7,16 @@ so each user has a completely isolated document space.
 Both PDF and URL sources are saved to disk (URLs were missing save_local before).
 """
 
+
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
-import os
+import functools, os
 
-embeddings = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
-)
+@functools.lru_cache(maxsize=1)
+def _get_embeddings():
+    return HuggingFaceEmbeddings(
+        model_name="sentence-transformers/all-MiniLM-L6-v2"
+    )
 
 BASE_DIR = "faiss_indexes"
 
@@ -29,7 +32,7 @@ def create_vector_store(chunks, doc_name: str, user_id: int):
     """Create a FAISS index from chunks and save it under the user's directory."""
     vector_store = FAISS.from_texts(
         [chunk.page_content for chunk in chunks],
-        embedding=embeddings,
+        embedding=_get_embeddings(),
         metadatas=[chunk.metadata for chunk in chunks]
     )
     path = os.path.join(_user_dir(user_id), doc_name)
@@ -44,7 +47,7 @@ def load_vector_store(doc_name: str, user_id: int):
     if os.path.exists(path):
         return FAISS.load_local(
             path,
-            embeddings,
+            _get_embeddings(),
             allow_dangerous_deserialization=True
         )
     return None
